@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simulado - Teoria Geral do Estado</title>
+
+<style>
+body{
+  font-family: Georgia, serif;
+  background:#f5e6c8;
+  margin:40px;
+}
+h1{text-align:center;}
+.question{
+  background:white;
+  padding:15px;
+  margin-bottom:20px;
+  border-left:6px solid #8b5a2b;
+  border-radius:6px;
+}
+button{
+  margin:5px;
+  padding:6px 12px;
+  cursor:pointer;
+}
+.correct{background:#c8f7c5;}
+.wrong{background:#f7c5c5;}
+.explanation{
+  margin-top:10px;
+  font-style:italic;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Simulado - Teoria Geral do Estado</h1>
+<div id="quiz"></div>
+
+<script>
+
+const questions = [
+
+{q:"1) A noção de sociedade natural sustenta que o agrupamento humano decorre:",a:["Da imposição estatal.","Da natureza humana.","De contrato formal.","De decisão econômica."],correct:1,exp:"A tradição aristotélica entende que o homem é naturalmente social."},
+
+{q:"2) A frase 'o homem é um animal político' revela que:",a:["O Estado cria a natureza humana.","A política é artificial.","A vida em comunidade realiza a natureza humana.","O poder é ilegítimo."],correct:2,exp:"Aristóteles via a polis como realização natural do homem."},
+
+{q:"3) Para Hobbes, o estado de natureza justifica o Estado porque:",a:["Há harmonia espontânea.","Predomina a guerra constante.","Existe democracia natural.","O homem é virtuoso."],correct:1,exp:"O medo da morte violenta leva ao contrato social."},
+
+{q:"4) O Leviatã simboliza:",a:["O Estado como homem artificial.","A religião medieval.","O feudalismo.","A separação de poderes."],correct:0,exp:"Hobbes descreve o Estado como homem artificial criado pelo contrato."},
+
+{q:"5) Rousseau diverge de Hobbes ao afirmar que o homem natural é:",a:["Violento.","Mau por essência.","Bom e livre.","Autoritário."],correct:2,exp:"Rousseau descreve o estado natural como idílico."},
+
+{q:"6) A vontade geral em Rousseau busca:",a:["Interesse individual.","Bem comum.","Força militar.","Interesse da maioria rica."],correct:1,exp:"Não é soma de vontades privadas, mas orientação ao bem comum."},
+
+{q:"7) Locke defende que antes do Estado já existiam:",a:["Direitos naturais.","Códigos penais.","Forças armadas.","Contrato formal."],correct:0,exp:"Vida, liberdade e propriedade são anteriores ao Estado."},
+
+{q:"8) O bem comum corresponde a:",a:["Distribuição igual de riqueza.","Condições que favoreçam o desenvolvimento humano.","Interesse do governante.","Vontade momentânea da maioria."],correct:1,exp:"É conjunto de condições sociais favoráveis."},
+
+{q:"9) Segundo Kelsen, o mundo físico é regido pelo princípio da:",a:["Imputação.","Causalidade.","Moralidade.","Contrato."],correct:1,exp:"Se A é, B é — relação automática."},
+
+{q:"10) No mundo ético, vigora o princípio da:",a:["Gravidade.","Causalidade.","Imputação.","Instinto."],correct:2,exp:"A consequência deve ser, mas pode não ocorrer."},
+
+{q:"11) A sociedade exige finalidade porque:",a:["Precisa de riqueza.","Necessita direção comum.","Impõe religião.","Exige território fixo."],correct:1,exp:"Finalidade orienta o agir coletivo."},
+
+{q:"12) Reiteração nas manifestações ordenadas significa:",a:["Mudança constante.","Repetição organizada de padrões.","Imposição militar.","Tradição religiosa."],correct:1,exp:"Garante segurança e previsibilidade."},
+
+{q:"13) Adequação exige que normas sejam:",a:["Universais e idênticas.","Compatíveis com cultura e história.","Religiosas.","Imutáveis."],correct:1,exp:"Normas devem refletir realidade social."},
+
+{q:"14) Poder social implica:",a:["Anarquia.","Submissão recíproca de vontades.","Ausência de autoridade.","Igualdade absoluta."],correct:1,exp:"Há sujeição para preservação do bem comum."},
+
+{q:"15) Poder legítimo é aquele:",a:["Imposto pela força.","Consentido pelo grupo.","Militar.","Hereditariedade divina."],correct:1,exp:"Legitimidade decorre do consentimento."},
+{q:"16) O anarquismo sustenta que o poder:",a:["É indispensável.","É ilegítimo e desnecessário.","É divino.","É natural."],correct:1,exp:"Anarquistas negam necessidade do poder estatal."},
+
+{q:"17) Determinismo social defende que:",a:["Homem controla totalmente o destino.","Fatores externos determinam a sociedade.","Poder é ilegítimo.","Contrato é central."],correct:1,exp:"Sociedade estaria sujeita a causas inevitáveis."},
+
+{q:"18) Finalismo sustenta que:",a:["Nada pode ser mudado.","Homem é protagonista da história.","Só economia importa.","Lei natural domina."],correct:1,exp:"O homem pode orientar a finalidade social."},
+
+{q:"19) Norma moral distingue-se da jurídica porque:",a:["É coercível.","É bilateral.","Não possui sanção estatal.","É imposta pelo Estado."],correct:2,exp:"Moral não implica coercibilidade."},
+
+{q:"20) Norma jurídica é imperativo-atributiva porque:",a:["Relaciona sujeitos com direitos e deveres.","É opcional.","É religiosa.","É unilateral."],correct:0,exp:"Há bilateralidade jurídica."},
+
+{q:"21) Adultério hoje no Brasil:",a:["É crime.","É contravenção.","É apenas questão moral.","É ilícito penal."],correct:2,exp:"Foi descriminalizado em 2005."},
+
+{q:"22) Montesquieu criticava a ideia de que o homem natural fosse:",a:["Pacífico.","Hostil por essência.","Livre.","Racional."],correct:1,exp:"Não via o homem primitivo como naturalmente mau."},
+
+{q:"23) Hobbes justificava governo forte porque:",a:["Acreditava na bondade humana.","Temia o caos do estado natural.","Defendia anarquia.","Rejeitava soberania."],correct:1,exp:"Mesmo governo mau é melhor que ausência de governo."},
+
+{q:"24) Rousseau influenciou:",a:["Revolução Francesa.","Império Romano.","Feudalismo.","Absolutismo inglês."],correct:0,exp:"Base da soberania popular moderna."},
+
+{q:"25) Sociedade não é:",a:["Simples reunião de pessoas.","Dotada de poder.","Orientada por finalidade.","Organizada."],correct:0,exp:"Exige elementos estruturais."},
+
+{q:"26) Maquiavel distingue virtude e fortuna como:",a:["Religião e poder.","Planejamento e circunstância.","Lei e moral.","Contrato e natureza."],correct:1,exp:"Virtude é ação; fortuna são circunstâncias externas."},
+
+{q:"27) Ciência Política é mais ampla que:",a:["Teoria do Estado.","Economia.","Religião.","Filosofia."],correct:0,exp:"Teoria do Estado está contida nela."},
+
+{q:"28) Estado é considerado:",a:["Pessoa jurídica.","Contrato privado.","Empresa.","Pessoa física."],correct:0,exp:"Sujeito de direitos e deveres."},
+
+{q:"29) Culturalismo jurídico observa:",a:["Contexto histórico e cultural.","Só lei escrita.","Só moral.","Só economia."],correct:0,exp:"Subjetividade contextual."},
+
+{q:"30) Teoria tridimensional envolve:",a:["Fato, valor e norma.","Só norma.","Só fato.","Só valor."],correct:0,exp:"Miguel Reale."},
+
+{q:"31) Poder totalitário é:",a:["Consentido.","Ilegítimo.","Popular.","Democrático."],correct:1,exp:"Falta consentimento social."},
+
+{q:"32) Sociedade contratual baseia-se:",a:["Na vontade.","Na natureza.","Na força.","Na religião."],correct:0,exp:"Contrato social."},
+
+{q:"33) Sociedade natural baseia-se:",a:["Na natureza humana.","Na economia.","Na força.","Na tradição militar."],correct:0,exp:"Concepção clássica."},
+
+{q:"34) Reiteração garante:",a:["Caos.","Segurança.","Improvisação.","Anarquia."],correct:1,exp:"Padronização gera previsibilidade."},
+
+{q:"35) Adequação evita:",a:["Compatibilidade cultural.","Desajuste social.","Pluralidade.","História."],correct:1,exp:"Normas devem refletir realidade."},
+
+{q:"36) Mundo físico caracteriza-se por:",a:["Automatismo causal.","Normatividade.","Imputação.","Liberdade."],correct:0,exp:"Se A é, B é."},
+
+{q:"37) Mundo social caracteriza-se por:",a:["Automatismo.","Imputação normativa.","Instinto.","Gravidade."],correct:1,exp:"Consequência deve ser."},
+
+{q:"38) Vontade geral difere da:",a:["Vontade individual.","Soberania popular.","Bem comum.","Interesse coletivo."],correct:0,exp:"Não é vontade privada."},
+
+{q:"39) Poder deve preservar:",a:["Bem comum.","Interesse pessoal.","Força.","Economia."],correct:0,exp:"Finalidade social."},
+
+{q:"40) Ordem humana difere da física porque:",a:["Não é automática.","É biológica.","É divina.","É instintiva."],correct:0,exp:"Não há determinismo absoluto."},
+
+{q:"41) Duguit associava poder a:",a:["Fato social.","Divindade.","Contrato.","Natureza."],correct:0,exp:"Base na solidariedade."},
+
+{q:"42) Agostinho via poder pagão como:",a:["Ilegítimo.","Natural.","Divino.","Necessário."],correct:0,exp:"Cidade de Deus."},
+
+{q:"43) Estado limita-se por:",a:["Direitos fundamentais.","Força.","Religião.","Economia."],correct:0,exp:"Constituição impõe limites."},
+
+{q:"44) Moral não implica:",a:["Sanção estatal.","Consciência.","Valor.","Ética."],correct:0,exp:"Sem coerção estatal."},
+
+{q:"45) Direito implica:",a:["Possibilidade de coerção.","Só moral.","Só opinião.","Só cultura."],correct:0,exp:"Possui sanção."},
+
+{q:"46) Sociedade exige poder porque:",a:["Precisa de coordenação.","Busca riqueza.","Impõe religião.","Evita cultura."],correct:0,exp:"Preserva finalidade social."},
+
+{q:"47) Finalidade social pode ser compreendida como:",a:["Bem comum.","Interesse privado.","Força.","Militarismo."],correct:0,exp:"Orienta vida coletiva."},
+
+{q:"48) Hobbes afirmava que o homem é:",a:["Lobo do homem.","Naturalmente bom.","Solidário.","Virtuoso."],correct:0,exp:"Expressa hostilidade natural."},
+
+{q:"49) Rousseau distingue vontade individual da:",a:["Vontade geral.","Religião.","Força.","Natureza."],correct:0,exp:"Elemento central de sua teoria."},
+
+{q:"50) Sociedade só existe quando há:",a:["Finalidade, ordem e poder.","Território fixo.","Exército.","Religião comum."],correct:0,exp:"Três elementos estruturais."}
+
+];
+
+const quiz=document.getElementById("quiz");
+
+questions.forEach((item)=>{
+  const div=document.createElement("div");
+  div.className="question";
+  div.innerHTML="<p>"+item.q+"</p>";
+  
+  item.a.forEach((option,i)=>{
+    const btn=document.createElement("button");
+    btn.innerText=option;
+
+    btn.onclick=function(){
+      if(div.querySelector(".explanation")) return;
+
+      const buttons = div.querySelectorAll("button");
+
+      buttons[item.correct].classList.add("correct");
+
+      if(i !== item.correct){
+        btn.classList.add("wrong");
+      }
+
+      buttons.forEach(b=>b.disabled=true);
+
+      const exp=document.createElement("div");
+      exp.className="explanation";
+      exp.innerText="Explicação: "+item.exp;
+      div.appendChild(exp);
+    };
+
+    div.appendChild(btn);
+  });
+
+  quiz.appendChild(div);
+});
+
+</script>
+</body>
+</html>
